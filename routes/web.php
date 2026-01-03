@@ -9,7 +9,9 @@ use App\Http\Controllers\StatistikController;
 use App\Http\Controllers\DendaController;
 
 
-// Route untuk tamu (belum login)
+// ==========================
+// ROUTE TAMU (BELUM LOGIN)
+// ==========================
 Route::middleware('guest')->group(function () {
     Route::get('/', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.process');
@@ -17,8 +19,17 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('register.process');
 });
 
-// Route untuk pengguna yang sudah login
+
+// ==========================
+// ROUTE AUTH (SUDAH LOGIN)
+// ==========================
 Route::middleware('auth')->group(function () {
+
+    // ⬇⬇⬇ FIX UTAMA (WAJIB)
+    Route::get('/home', function () {
+        return redirect()->route('dashboard');
+    });
+
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     
@@ -32,7 +43,7 @@ Route::middleware('auth')->group(function () {
     // Paket CRUD
     Route::resource('paket', PaketController::class);
     
-    // Aksi tambahan untuk paket
+    // Aksi tambahan paket
     Route::post('/paket/{paket}/ambil', [PaketController::class, 'ambilPaket'])->name('paket.ambil');
     Route::get('/paket/{paket}/notifikasi', [PaketController::class, 'kirimNotifikasiWA'])->name('paket.notifikasi');
     Route::get('/paket/{paket}/reminder', [PaketController::class, 'kirimReminder'])->name('paket.reminder');
@@ -51,7 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/export/tahunan', [ExportController::class, 'exportTahunan'])->name('export.tahunan');
     Route::get('/export/semua', [ExportController::class, 'exportSemua'])->name('export.semua');
 
-    // STATISTIK
+    // Statistik
     Route::get('/statistik', [StatistikController::class, 'index'])->name('statistik');
     Route::get('/api/statistik/realtime', [StatistikController::class, 'getRealtimeData'])->name('statistik.realtime');
 });
