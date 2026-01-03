@@ -1,5 +1,4 @@
 <?php
-// File: app/Models/Rak.php
 
 namespace App\Models;
 
@@ -22,15 +21,11 @@ class Rak extends Model
         'is_active' => 'boolean',
     ];
 
-    // Hitung sisa kapasitas
+    /**
+     * HITUNG SISA KAPASITAS OTOMATIS
+     */
     public function getSisaKapasitasAttribute()
     {
-        return $this->kapasitas - $this->terisi;
-    }
-
-    // Cek apakah rak penuh
-    public function getIsPenuhAttribute()
-    {
-        return $this->terisi >= $this->kapasitas;
+        return max(0, $this->kapasitas - $this->terisi);
     }
 }
