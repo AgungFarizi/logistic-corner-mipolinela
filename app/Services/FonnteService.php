@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 class FonnteService
 {
-    protected string $token;
+    protected ?string $token;
 
     public function __construct()
     {
