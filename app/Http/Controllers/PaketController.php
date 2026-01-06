@@ -66,21 +66,9 @@ class PaketController extends Controller
     public function create()
     {
         $raks = Rak::all();
-
-        dd($raks); // ⛔ JANGAN DIHAPUS DULU
-
-        $ekspedisiList = [
-            'JNE',
-            'J&T',
-            'SiCepat',
-            'AnterAja',
-            'Shopee Express',
-            'Tokopedia',
-            'Lainnya'
-        ];
-
-        return view('paket.create', compact('raks', 'ekspedisiList'));
+        dd($raks);
     }
+
 
 
 
