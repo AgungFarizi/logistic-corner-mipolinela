@@ -14,9 +14,9 @@ class PaketController extends Controller
 {
     protected $fonnte;
 
-    public function __construct()
+    public function __construct(FonnteService $fonnte)
     {
-        $this->fonnte = new FonnteService();
+        $this->fonnte = $fonnte;
     }
 
     /**
