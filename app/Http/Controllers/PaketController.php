@@ -64,21 +64,24 @@ class PaketController extends Controller
      * Form input paket baru
      */
     public function create()
-        {
-            $raks = Rak::where('is_active', true)->get();
-        
-            $ekspedisiList = [
-                'JNE',
-                'J&T',
-                'SiCepat',
-                'AnterAja',
-                'Shopee Express',
-                'Tokopedia',
-                'Lainnya'
-            ];
-        
-            return view('paket.create', compact('raks', 'ekspedisiList'));
-        }
+    {
+        $raks = Rak::all();
+
+        dd($raks); // ⛔ JANGAN DIHAPUS DULU
+
+        $ekspedisiList = [
+            'JNE',
+            'J&T',
+            'SiCepat',
+            'AnterAja',
+            'Shopee Express',
+            'Tokopedia',
+            'Lainnya'
+        ];
+
+        return view('paket.create', compact('raks', 'ekspedisiList'));
+    }
+
 
 
     /**
