@@ -11,18 +11,13 @@ use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    public function run(): void
+        public function run(): void
     {
-        // Buat admin default jika belum ada
-        if (!User::where('username', 'admin')->exists()) {
-            User::create([
-                'nama_lengkap' => 'Administrator',
-                'username' => 'admin',
-                'email' => 'admin@logisticcorner.com',
-                'password' => Hash::make('admin123'),
-                'role' => 'superadmin',
-            ]);
-        }
+        $this->call([
+            RakSeeder::class,
+        ]);
+    }
+
 
         // Buat data rak jika belum ada
         $raks = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'];
