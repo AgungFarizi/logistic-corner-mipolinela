@@ -5,27 +5,26 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Rak;
 
-class RakSeeder extends Seeder
+class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $raks = [
-            ['kode_rak'=>'A1','lokasi'=>'Blok A','kapasitas'=>10,'terisi'=>0,'is_active'=>1],
-            ['kode_rak'=>'A2','lokasi'=>'Blok A','kapasitas'=>10,'terisi'=>0,'is_active'=>1],
-            ['kode_rak'=>'A3','lokasi'=>'Blok A','kapasitas'=>10,'terisi'=>0,'is_active'=>1],
-            ['kode_rak'=>'B1','lokasi'=>'Blok B','kapasitas'=>10,'terisi'=>0,'is_active'=>1],
-            ['kode_rak'=>'B2','lokasi'=>'Blok B','kapasitas'=>10,'terisi'=>0,'is_active'=>1],
-            ['kode_rak'=>'B3','lokasi'=>'Blok B','kapasitas'=>10,'terisi'=>0,'is_active'=>1],
-            ['kode_rak'=>'C1','lokasi'=>'Blok C','kapasitas'=>10,'terisi'=>0,'is_active'=>1],
-            ['kode_rak'=>'C2','lokasi'=>'Blok C','kapasitas'=>10,'terisi'=>0,'is_active'=>1],
-            ['kode_rak'=>'C3','lokasi'=>'Blok C','kapasitas'=>10,'terisi'=>0,'is_active'=>1],
+        Rak::truncate();
+
+        $data = [
+            ['kode_rak' => 'A1', 'lokasi' => 'Rak A1', 'kapasitas' => 10, 'terisi' => 0, 'is_active' => true],
+            ['kode_rak' => 'A2', 'lokasi' => 'Rak A2', 'kapasitas' => 10, 'terisi' => 0, 'is_active' => true],
+            ['kode_rak' => 'A3', 'lokasi' => 'Rak A3', 'kapasitas' => 10, 'terisi' => 0, 'is_active' => true],
+            ['kode_rak' => 'B1', 'lokasi' => 'Rak B1', 'kapasitas' => 10, 'terisi' => 0, 'is_active' => true],
+            ['kode_rak' => 'B2', 'lokasi' => 'Rak B2', 'kapasitas' => 10, 'terisi' => 0, 'is_active' => true],
+            ['kode_rak' => 'B3', 'lokasi' => 'Rak B3', 'kapasitas' => 10, 'terisi' => 0, 'is_active' => true],
+            ['kode_rak' => 'C1', 'lokasi' => 'Rak C1', 'kapasitas' => 10, 'terisi' => 0, 'is_active' => true],
+            ['kode_rak' => 'C2', 'lokasi' => 'Rak C2', 'kapasitas' => 10, 'terisi' => 0, 'is_active' => true],
+            ['kode_rak' => 'C3', 'lokasi' => 'Rak C3', 'kapasitas' => 10, 'terisi' => 0, 'is_active' => true],
         ];
 
-        foreach ($raks as $rak) {
-            Rak::updateOrCreate(
-                ['kode_rak' => $rak['kode_rak']],
-                $rak
-            );
+        foreach ($data as $rak) {
+            Rak::create($rak);
         }
     }
 }
