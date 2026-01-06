@@ -51,7 +51,11 @@ class PaketController extends Controller
         }
 
         $pakets = $query->orderBy('created_at', 'desc')->paginate(10);
-        $raks = Rak::where('is_active', true)->get();
+        $raks = Rak::where('is_active', 1)
+            ->whereColumn('terisi', '<', 'kapasitas')
+            ->orderBy('kode_rak')
+            ->get();
+
 
         return view('paket.index', compact('pakets', 'raks'));
     }
