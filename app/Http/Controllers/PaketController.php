@@ -14,9 +14,9 @@ class PaketController extends Controller
 {
     protected $fonnte;
 
-    public function __construct(FonnteService $fonnte)
+    public function __construct()
     {
-        $this->fonnte = $fonnte;
+        $this->fonnte = new FonnteService();
     }
 
     /**
@@ -51,11 +51,7 @@ class PaketController extends Controller
         }
 
         $pakets = $query->orderBy('created_at', 'desc')->paginate(10);
-        $raks = Rak::where('is_active', 1)
-            ->whereColumn('terisi', '<', 'kapasitas')
-            ->orderBy('kode_rak')
-            ->get();
-
+        $raks = Rak::where('is_active', true)->get();
 
         return view('paket.index', compact('pakets', 'raks'));
     }
@@ -65,12 +61,11 @@ class PaketController extends Controller
      */
     public function create()
     {
-        $raks = Rak::all();
-        dd($raks);
+        $raks = Rak::where('is_active', true)->get();
+        $ekspedisiList = ['JNE', 'J&T', 'SiCepat', 'AnterAja', 'Shopee Express', 'Tokopedia', 'Lainnya'];
+        
+        return view('paket.create', compact('raks', 'ekspedisiList'));
     }
-
-
-
 
     /**
      * Simpan paket baru + KIRIM NOTIFIKASI OTOMATIS

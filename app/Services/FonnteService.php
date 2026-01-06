@@ -45,12 +45,17 @@ class FonnteService
 
     public function notifikasiPaketMasuk(Paket $paket): array
     {
-        $pesan = "📦 *Paket Anda Telah Tiba!*\n\n"
-               . "Resi: {$paket->no_resi}\n"
-               . "Ekspedisi: {$paket->ekspedisi}\n"
-               . "Rak: {$paket->rak}\n"
-               . "Batas ambil: {$paket->batas_pengambilan}\n\n"
-               . "Silakan segera diambil. Terima kasih 🙏";
+       $pesan = "Hallo kak 👋\n\n"
+       . "Paket dengan nama *{$paket->nama_penerima}*, "
+       . "No Resi *{$paket->no_resi}* sudah sampai di "
+       . "*Logistic Corner Polinela*.\n\n"
+       . "Batas Ambil: *" . \Carbon\Carbon::parse($paket->batas_pengambilan)->translatedFormat('d M Y') . "*\n\n"
+       . "Silahkan diambil dan konfirmasi oleh Admin yang ada disana yaa kak.\n\n"
+       . "*Jika terlambat mengambil / Paket menginap akan dikenakan denda Rp. 1.000 per harinya.*\n\n"
+       . "Terima kasihh 🙏\n\n"
+       . "_Logistic Corner Polinela_\n\n"
+       ;
+
 
         return $this->kirimPesan($paket->no_whatsapp, $pesan);
     }
