@@ -21,11 +21,13 @@ class Rak extends Model
         'is_active' => 'boolean',
     ];
 
-    /**
-     * HITUNG SISA KAPASITAS OTOMATIS
-     */
     public function getSisaKapasitasAttribute()
     {
-        return max(0, $this->kapasitas - $this->terisi);
+        return max(0, (int)$this->kapasitas - (int)$this->terisi);
+    }
+
+    public function getIsPenuhAttribute()
+    {
+        return (int)$this->terisi >= (int)$this->kapasitas;
     }
 }
