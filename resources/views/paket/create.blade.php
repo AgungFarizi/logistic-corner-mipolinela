@@ -48,19 +48,18 @@
 
                 <div>
                     <label class="block text-sm font-medium mb-2">Rak Penyimpanan *</label>
-                    <select name="rak" class="form-control" required>
-                    <option value="">-- Pilih Rak --</option>
-
-                    @forelse($raks as $rak)
-                        <option value="{{ $rak->kode_rak }}">
-                            Rak {{ $rak->kode_rak }} - {{ $rak->lokasi }}
-                            (Sisa: {{ $rak->kapasitas - $rak->terisi }})
-                        </option>
-                    @empty
-                        <option value="">Rak tidak tersedia</option>
-                    @endforelse
-                </select>
-
+                    <select name="rak" class="w-full px-4 py-3 border rounded-xl" required>
+                        <option value="">-- Pilih Rak --</option>
+                        @foreach($raks as $rak)
+                            @if($rak->sisa_kapasitas > 0)
+                                <option value="{{ $rak->kode_rak }}">
+                                    Rak {{ $rak->kode_rak }}
+                                    ({{ $rak->lokasi }}) -
+                                    Sisa: {{ $rak->sisa_kapasitas }}
+                                </option>
+                            @endif
+                        @endforeach
+                    </select>
                 </div>
 
                 <div>
